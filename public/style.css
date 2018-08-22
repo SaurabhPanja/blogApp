@@ -1,0 +1,25 @@
+body{
+  background: #ECE9E6;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #FFFFFF, #ECE9E6);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #FFFFFF, #ECE9E6); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+}
+nav{
+  margin-bottom: 1em;
+}
+
+footer{
+  margin: 1em 0;
+}
+
+#index-image{
+  margin: auto;
+  width:50%;
+  height:10em
+}
+
+#show-image{
+  box-shadow: 5px 5px 5px 5px #3f4c6b;
+  border-radius: 1em;
+  margin-bottom: 1em;
+}
