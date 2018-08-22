@@ -9,9 +9,9 @@
     <div class="card">
     <img id="index-image" class="card-img-top img-thumbnail mt-3" src="<%=blogs[i].image%>">
     <div class="card-body">
-      <h5 class="card-title"><%=blogs[i].title%></h5>
+      <h5 class="card-title"><%=blogs[i].title.substring(0,20) + "..."%></h5>
       <p class="card-text"><%=blogs[i].description.substring(0,100) + "..."%></p>
-      <a href="/blogs/show/<%=blogs[i]._id%>" class="btn btn-primary btn-block">Read More</a>
+      <a href="/blogs/show/<%=blogs[i]._id%>" class="btn btn-primary btn-block">Read More <i class="fas fa-book-reader"></i></a>
       <footer class="blockquote-footer">
           <small><%=blogs[i].created.toDateString() %></small>
       </footer>

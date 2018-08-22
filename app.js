@@ -1,13 +1,17 @@
-var express    = require("express"),
-    app        = express(),
-    bodyParser = require("body-parser"),
-    mongoose   = require("mongoose");
+var express        = require("express"),
+    app            = express(),
+    bodyParser     = require("body-parser"),
+    methodOverride = require("method-override"),
+    expressSanitizer = require("express-sanitizer"),
+    mongoose       = require("mongoose");
 
 mongoose.connect("mongodb://localhost/blogApp",{ useNewUrlParser: true });
 
 app.set("view engine","ejs");
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({extended:true}));
+app.use(expressSanitizer());
+app.use(methodOverride("_method"));
 
 
 //Database Schema
@@ -54,6 +58,7 @@ app.get("/blogs/new",function (req,res) {
 });
 //create route
 app.post("/blogs",function (req,res) {
+  req.body.description = req.sanitize(req.body.description);
   Blog.create({
     title : req.body.title,
     description : req.body.description,
@@ -68,22 +73,42 @@ app.post("/blogs",function (req,res) {
   });
 });
 //update route
-app.get("/blogs",function (req,res) {
-  res.send("Hello");
+app.put("/blogs/:id",function (req,res) {
+  req.body.description = req.sanitize(req.body.description);
+  Blog.findByIdAndUpdate(req.params.id,req.body,function (err,data) {
+    if (err) {
+      console.log(err);
+    }else {
+      res.redirect("/blogs/show/"+req.params.id);
+      console.log(data);
+    }
+  });
 });
 //delete route
-app.get("/blogs",function (req,res) {
-  res.send("Hello");
+app.delete("/blogs/:id",function (req,res) {
+  Blog.findByIdAndRemove(req.params.id,function (err) {
+      if (err) {
+        console.log(err);
+      }else {
+        res.redirect("/");
+      }
+  });
 });
 //edit route
 app.get("/blogs/:id/edit",function (req,res) {
-  res.send("Hello");
+  Blog.findById(req.params.id,function (err,data) {
+    if (err) {
+      console.log(err);
+    }else {
+      res.render("edit",{blog:data});
+    }
+  });
 });
 //else if
 app.get("*",function (req,res) {
   res.send("Error 404");
 });
 
-app.listen(8080,function () {
+app.listen(3333,function () {
   console.log("Server running on port 8080");
 });
