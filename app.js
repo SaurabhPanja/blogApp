@@ -6,7 +6,7 @@ var express        = require("express"),
     mongoose       = require("mongoose");
 
 //mongoose.connect("mongodb://localhost/blogApp",{ useNewUrlParser: true });
-mongoose.connect("mongodb://Admin:saurabh1@ds229722.mlab.com:29722/mycamp",{ useNewUrlParser: true });
+mongoose.connect("mongodb://Admin:saurabh1@ds117128.mlab.com:17128/blogapp",{ useNewUrlParser: true });
 app.set("view engine","ejs");
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({extended:true}));
