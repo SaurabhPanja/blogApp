@@ -5,8 +5,8 @@ var express        = require("express"),
     expressSanitizer = require("express-sanitizer"),
     mongoose       = require("mongoose");
 
-mongoose.connect("mongodb://localhost/blogApp",{ useNewUrlParser: true });
-
+//mongoose.connect("mongodb://localhost/blogApp",{ useNewUrlParser: true });
+mongoose.connect("mongodb://Admin:saurabh1@ds229722.mlab.com:29722/mycamp",{ useNewUrlParser: true });
 app.set("view engine","ejs");
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({extended:true}));
@@ -109,6 +109,6 @@ app.get("*",function (req,res) {
   res.send("Error 404");
 });
 
-app.listen(3333,function () {
-  console.log("Server running on port 8080");
+app.listen(process.env.PORT,process.env.IP,function () {
+  //console.log("Server running on port 8080");
 });
